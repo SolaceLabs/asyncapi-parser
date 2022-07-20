@@ -1,0 +1,33 @@
+---
+title: myEventApi
+description: myEventApi
+apiVersion: 0.1.0
+applicationDomainId: htkekrh37s0
+applicationDomainName: myAppDomain
+eventApiState: 1
+eventApiStateName: DRAFT
+modeledEventMesh: demo-mesh
+eventPortalInstanceId: null
+environment: null
+logicalBroker: logical_broker_a
+queueDefinitions:
+- queueName: CreatedHREvents
+  queueSettings:
+    accessType: exclusive
+  topicSubscriptions:
+  - person/*/created
+  - person/other/topic
+- queueName: UpdatedHREvents
+  queueSettings:
+    accessType: non-exclusive
+  topicSubscriptions:
+  - person/*/updated
+  - person/other/topic
+  - person/third/topic
+- queueName: WHOLE_OTHER_QUEUE
+  queueSettings:
+    accessType: non-exclusive
+  topicSubscriptions:
+  - star/*/updated
+  - star/other/topic
+  - star/third/topic

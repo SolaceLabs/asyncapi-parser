@@ -1,0 +1,499 @@
+asyncapi: '2.0.0'
+id: 'urn:com.asyncapi.user-mgmt.lifecycle'
+info:
+  contact:
+    name: sie-vandals@sony.com
+  title: user-mgmt-events
+  version: '0.1.0'
+  description: |
+    Partner related user management lifecycle events.
+components:
+  schemas:
+    event:
+      type: object
+      properties:
+        event_id:
+          type: string
+          description: uuid of event
+          examples:
+            - 6d2a28a4-4fca-451e-a318-ec20baa1a135
+        event_timestamp:
+          type: integer
+          description: Timestamp of when event got sent to Kafka
+          examples:
+            - 1631206208
+        event_topic:
+          type: string
+          description: Name of topic associated with the event
+        event_name:
+          type: string
+          description: Name given to event
+        version:
+          type: string
+          description: Semantic version of the event
+        operation:
+          type: string
+          description: Action done in association with this event
+          examples:
+            - created
+            - provisioned
+        publisher:
+          type: string
+          description: clientname of the event publisher
+        actor:
+          type: string
+          description: System or user that took action to trigger the event
+    user-created-data:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/data'
+      - type: object
+    user-updated-data:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/data'
+        - type: object
+          properties:
+            before:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: User email
+                firstName:
+                  type: string
+                  description: first name of user
+                lastName:
+                  type: string
+                  description: last name of user
+                locale:
+                  type: string
+                  description: Language and country code for user
+                worksForCompanyID:
+                  type: string
+                  description: Okta ID for the company associated with the user
+            after:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: User email
+                firstName:
+                  type: string
+                  description: first name of user
+                lastName:
+                  type: string
+                  description: last name of user
+                locale:
+                  type: string
+                  description: Language and country code for user
+                worksForCompanyID:
+                  type: string
+                  description: Okta ID for the company associated with the user
+    user-passwordreset-data:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/data'
+        - type: object
+          properties:
+            before:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: User email
+                firstName:
+                  type: string
+                  description: first name of user
+                lastName:
+                  type: string
+                  description: last name of user
+                locale:
+                  type: string
+                  description: Language and country code for user
+                worksForCompanyID:
+                  type: string
+                  description: Okta ID for the company associated with the user
+            after:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: User email
+                firstName:
+                  type: string
+                  description: first name of user
+                lastName:
+                  type: string
+                  description: last name of user
+                locale:
+                  type: string
+                  description: Language and country code for user
+                worksForCompanyID:
+                  type: string
+                  description: Okta ID for the company associated with the user
+    user-passwordexpire-data:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/data'
+        - type: object
+    user-provisioned-data:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/data'
+        - type: object
+          properties:
+            provisionedTo:
+              type: array
+              description: Applications the user was provisioned to
+              items:
+                type: string
+    user-deprovisioned-data:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/data'
+        - type: object
+          properties:
+            provisionedTo:
+              type: array
+              description: Applications the user was provisioned to
+              items:
+                type: string
+    user-activated-data:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/data'
+        - type: object
+    user-deactivated-data:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/data'
+        - type: object
+    user-suspended-data:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/data'
+        - type: object
+    user-unsuspended-data:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/data'
+        - type: object
+    user-locked-data:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/data'
+        - type: object
+    user-unlocked-data:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/data'
+        - type: object
+    data:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: Timestamp of action in UM
+        updatedby:
+          type: string
+          description: User ID of who initiated the action
+        updatedbyname:
+          type: string
+          description: First and last name of user who initiated the action
+        reason:
+          type: string
+          description: Reason given by user for update
+        x-request-by:
+          type: string
+          description: Name of app that requested the update
+        profile:
+          $ref: '#/components/schemas/profile'
+    profile:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of user profile
+        status:
+          type: string
+          description: Status of user
+          examples:
+            - STAGED
+            - ACTIVE
+        created:
+          type: string
+          description: Timestamp of user creation date
+        activated:
+          type: string
+          description: Timestamp of user activation date
+        statusChanged:
+          type: string
+          description: Timestamp of last user status change
+        lastLogin:
+          type: string
+          description: Timestamp of last user login
+        lastUpdated:
+          type: string
+          description: Timestamp of last update to user profile
+        passwordChanged:
+          type: string
+          description: Timestamp of last password change
+        firstName:
+          type: string
+          description: First name of user
+        lastName:
+          type: string
+          description: Last name of user
+        email:
+          type: string
+          description: Email address of user
+        locale:
+          type: string
+          description: Language and region code used by the user
+          examples:
+            - en_US
+            - jp_JP
+        worksForCompanyID:
+          type: string
+          description: ID of the company associated with the user
+        appgroup:
+          type: string
+          description: Name of group for app assignment
+        role:
+          type: string
+          description: Role used for user's permissions
+          examples:
+            - SIEAdmin
+
+  messages:
+    user-created:
+      summary: Okta user created events
+      description: |
+        Messages for user created events
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/event'
+          - type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/user-created-data'
+            required:
+              - data
+    user-updated:
+      summary: Okta user created events
+      description: |
+        Messages for user created events
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/event'
+          - type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/user-updated-data'
+            required:
+              - data
+    user-passwrdreset:
+      summary: Okta user created events
+      description: |
+        Messages for user created events
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/event'
+          - type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/user-passwordreset-data'
+            required:
+              - data
+    user-passwrdexpire:
+      summary: Okta user password expired events
+      description: |
+        Messages for user password expired events
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/event'
+          - type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/user-passwordexpire-data'
+            required:
+              - data
+    user-provisioned:
+      summary: Okta user provisioned events
+      description: |
+        Messages for user provisioning events 
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/event'
+          - type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/user-provisioned-data'
+            required:
+              - data
+    user-deprovisioned:
+      summary: Okta user deprovisioned events
+      description: |
+        Messages for user deprovisioning events 
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/event'
+          - type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/user-deprovisioned-data'
+            required:
+              - data
+    user-activated:
+      summary: Okta user activated events
+      description: |
+        Messages for user activation events 
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/event'
+          - type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/user-activated-data'
+            required:
+              - data
+    user-deactivated:
+      summary: Okta user deactivated events
+      description: |
+        Messages for user deactivation events 
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/event'
+          - type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/user-deactivated-data'
+            required:
+              - data
+    user-suspended:
+      summary: Okta user suspended events
+      description: |
+        Messages for user suspension events 
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/event'
+          - type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/user-suspended-data'
+            required:
+              - data
+    user-unsuspended:
+      summary: Okta user unsuspended events
+      description: |
+        Messages for user unsuspension events 
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/event'
+          - type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/user-unsuspended-data'
+            required:
+              - data
+    user-locked:
+      summary: Okta user locked events
+      description: |
+        Messages for user locked events 
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/event'
+          - type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/user-locked-data'
+            required:
+              - data
+    user-unlocked:
+      summary: Okta user locked events
+      description: |
+        Messages for user locked events 
+      payload:
+        allOf:
+          - $ref: '#/components/schemas/event'
+          - type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/user-unlocked-data'
+            required:
+              - data
+
+channels:
+  usermgmt_user_created_e1-np_1.0:
+    publish:
+      operationId: usercreated
+      summary: User was created
+      message:
+        $ref: '#/components/messages/user-created'
+  usermgmt_user_updated_e1-np_1.0:
+    publish:
+      operationId: userupdated
+      summary: User was updated
+      message:
+        $ref: '#/components/messages/user-updated'
+  usermgmt_user_passwordreset_e1-np_1.0:
+    publish:
+      operationId: userpasswordreset
+      summary: User password was reset
+      message:
+        $ref: '#/components/messages/user-passwrdreset'
+  usermgmt_user_passwordexpire_e1-np_1.0:
+    publish:
+      operationId: userpasswordexpire
+      summary: User password was expired
+      message:
+        $ref: '#/components/messages/user-passwrdexpire'
+  usermgmt_user_provisioned_e1-np_1.0:
+    publish:
+      operationId: userprovisioned
+      summary: User was provisioned
+      message:
+        $ref: '#/components/messages/user-provisioned'
+  usermgmt_user_deprovisioned_e1-np_1.0:
+    publish:
+      operationId: userdeprovisioned
+      summary: User was deprovisioned
+      message:
+        $ref: '#/components/messages/user-deprovisioned'
+  usermgmt_user_activated_e1-np_1.0:
+    publish:
+      operationId: useractivated
+      summary: User was activated
+      message:
+        $ref: '#/components/messages/user-activated'
+  usermgmt_user_deactivated_e1-np_1.0:
+    publish:
+      operationId: userdeactivated
+      summary: User was deactivated
+      message:
+        $ref: '#/components/messages/user-deactivated'
+  usermgmt_user_suspended_e1-np_1.0:
+    publish:
+      operationId: usersuspended
+      summary: User was suspended
+      message:
+        $ref: '#/components/messages/user-suspended'
+  usermgmt_user_unsuspended_e1-np_1.0:
+    publish:
+      operationId: userunsuspended
+      summary: User was unsuspended
+      message:
+        $ref: '#/components/messages/user-unsuspended'
+  usermgmt_user_locked_e1-np_1.0:
+    publish:
+      operationId: userlocked
+      summary: User was locked
+      message:
+        $ref: '#/components/messages/user-locked'
+  usermgmt_user_unlocked_e1-np_1.0:
+    publish:
+      operationId: userunlocked
+      summary: User was unlocked
+      message:
+        $ref: '#/components/messages/user-unlocked'

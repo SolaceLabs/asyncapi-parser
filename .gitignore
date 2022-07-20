@@ -1,0 +1,6 @@
+.DS_Store
+target/lib/*.jar
+target/*.jar
+*.class
+.vscode/settings.json
+target/maven-status/maven-compiler-plugin/**/*.lst
