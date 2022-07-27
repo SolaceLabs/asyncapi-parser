@@ -5,7 +5,7 @@
     <property name="java.vm.version" value="11.0.11+9-LTS-194"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-11.0.11.jdk/Contents/Home/lib"/>
     <property name="gopherProxySet" value="false"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/dennisbrinley/Development/workspaces/solace-codelab/asyncapi-parser/asyncapi-parser"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/dennisbrinley/Development/Projects/ansible-jenkins/asyncapi-parser"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="https://openjdk.java.net/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -15,7 +15,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/dennisbrinley/Development/workspaces/solace-codelab/asyncapi-parser/asyncapi-parser"/>
+    <property name="user.dir" value="/Users/dennisbrinley/Development/Projects/ansible-jenkins/asyncapi-parser"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="11.0.11+9-LTS-194"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
@@ -45,7 +45,7 @@
     <property name="java.class.path" value="/Users/dennisbrinley/Development/apache-maven-3.8.1/boot/plexus-classworlds-2.6.0.jar"/>
     <property name="java.vm.specification.version" value="11"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher install -f /Users/dennisbrinley/Development/workspaces/solace-codelab/asyncapi-parser/asyncapi-parser/pom.xml"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher install -f /Users/dennisbrinley/Development/Projects/ansible-jenkins/asyncapi-parser/pom.xml"/>
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk-11.0.11.jdk/Contents/Home"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>

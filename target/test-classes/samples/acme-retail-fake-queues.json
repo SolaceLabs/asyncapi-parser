@@ -1,31 +1,37 @@
 {
     "servers":
     {
-        "deployment_spec":
+        "integration":
         {
-            "url": "westcoast",
-            "description": "logical server - westcoast",
+            "url": "integration-test-env",
+            "description": "Integration Test Environment",
             "protocol": "solace",
             "protocolVersion": "1.0.0",
-            "x-ep-modelled-event-mesh": "demo-mesh",
-            "x-ep-logical-broker": "logical_broker_a"
+            "x-ep-modelled-event-mesh": "acme-retail Store",
+            "x-ep-modelled-event-mesh-id": "nk29cfpn55c",
+            "x-ep-environment-id": "i6f2y4eviq3",
+            "x-ep-logical-broker": "logical_broker_b"
         },
         "development":
         {
-            "url": "westcoast",
-            "description": "logical server - westcoast",
+            "url": "development-env",
+            "description": "Development Environment",
             "protocol": "solace",
             "protocolVersion": "1.0.0",
-            "x-ep-modelled-event-mesh": "demo-mesh",
-            "x-ep-logical-broker": "logical_broker_a"
+            "x-ep-modelled-event-mesh": "acme-retail Store",
+            "x-ep-modelled-event-mesh-id": "46h17klzg1n",
+            "x-ep-environment-id": "bvmn5likrk2",
+            "x-ep-logical-broker": "logical_broker_b"
         },
-        "integration-test":
+        "production":
         {
-            "url": "eastcoast",
-            "description": "logical server - eastcoast",
+            "url": "production-env",
+            "description": "Production Environment",
             "protocol": "solace",
             "protocolVersion": "1.0.0",
-            "x-ep-modelled-event-mesh": "demo-mesh",
+            "x-ep-modelled-event-mesh": "acme-retail Store",
+            "x-ep-modelled-event-mesh-id": "nb0b6yoojr2",
+            "x-ep-environment-id": "7k9gh388bd7",
             "x-ep-logical-broker": "logical_broker_b"
         }
     },
@@ -104,7 +110,7 @@
                         "destinations": [
                             {
                                 "destinationType": "queue",
-                                "deliveryMode": "direct",
+                                "deliveryMode": "persistent",
                                 "queue": {
                                     "name": "CreatedHREvents",
                                     "topicSubscriptions": [
@@ -171,12 +177,15 @@
     "asyncapi": "2.0.0",
     "info":
     {
-        "x-event-api-state-name": "DRAFT",
-        "description": "myEventApi",
-        "x-application-domain-id": "htkekrh37s0",
-        "title": "myEventApi",
-        "x-application-domain-name": "myAppDomain",
+        "title": "acme-retail-customer-mobile",
+        "description": "AsyncAPI for Customer Facing Mobile Application",
         "version": "0.1.0",
-        "x-event-api-state-id": "1"
+        "x-event-api-state-id": "1",
+        "x-event-api-state-name": "DRAFT",
+        "x-application-domain-id": "9n3oj6yfxm3",
+        "x-application-domain-name": "acme-retail - Store Operations",
+        "x-application-id": "28a372rrk0s",
+        "x-application-name": "Customer Facing Mobile Application",
+        "x-application-version-id": "hxd36iqulyh"
     }
 }

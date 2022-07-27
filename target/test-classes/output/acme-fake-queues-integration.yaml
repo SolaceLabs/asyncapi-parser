@@ -1,15 +1,19 @@
 ---
-title: myEventApi
-description: myEventApi
+title: acme-retail-customer-mobile
+description: AsyncAPI for Customer Facing Mobile Application
 apiVersion: 0.1.0
-applicationDomainId: htkekrh37s0
-applicationDomainName: myAppDomain
-eventApiState: 1
+applicationDomainId: 9n3oj6yfxm3
+applicationDomainName: acme-retail - Store Operations
+applicationId: 28a372rrk0s
+applicationName: Customer Facing Mobile Application
+applicationVersionId: hxd36iqulyh
+eventApiStateId: 1
 eventApiStateName: DRAFT
-modeledEventMesh: demo-mesh
-eventPortalInstanceId: null
-environment: null
-logicalBroker: logical_broker_a
+environment: integration
+modelledEventMesh: acme-retail Store
+modelledEventMeshId: nk29cfpn55c
+eventPortalEnvironmentId: i6f2y4eviq3
+logicalBroker: logical_broker_b
 queueDefinitions:
 - queueName: CreatedHREvents
   queueSettings:

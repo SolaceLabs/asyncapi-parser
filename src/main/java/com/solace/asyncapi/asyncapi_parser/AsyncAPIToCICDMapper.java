@@ -64,9 +64,15 @@ public class AsyncAPIToCICDMapper {
 		config.setApiVersion(apiInfo.getVersion());
 		config.setApplicationDomainId(apiInfo.getExtensionFields().get("x-application-domain-id"));
 		config.setApplicationDomainName(apiInfo.getExtensionFields().get("x-application-domain-name"));
-		config.setEventApiState(apiInfo.getExtensionFields().get("x-event-api-state-id"));
+		config.setApplicationId(apiInfo.getExtensionFields().get("x-application-id"));
+		config.setApplicationName(apiInfo.getExtensionFields().get("x-application-name"));
+		config.setApplicationVersionId(apiInfo.getExtensionFields().get("x-application-version-id"));
+		config.setEventApiStateId(apiInfo.getExtensionFields().get("x-event-api-state-id"));
 		config.setEventApiStateName(apiInfo.getExtensionFields().get("x-event-api-state-name"));
-		config.setModeledEventMesh(serverRecord.getExtensionFields().get("x-ep-modelled-event-mesh"));
+		config.setEnvironment( serverId );
+		config.setModelledEventMesh(serverRecord.getExtensionFields().get("x-ep-modelled-event-mesh"));
+		config.setModelledEventMeshId(serverRecord.getExtensionFields().get("x-ep-modelled-event-mesh-id"));
+		config.setEventPortalEnvironmentId(serverRecord.getExtensionFields().get("x-ep-environment-id"));
 		config.setLogicalBroker(serverRecord.getExtensionFields().get("x-ep-logical-broker"));
 
 		ArrayList<QueueDefinition> queueDefinitions = new ArrayList<QueueDefinition>();

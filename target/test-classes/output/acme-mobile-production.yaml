@@ -1,0 +1,24 @@
+---
+title: acme-retail-customer-mobile
+description: AsyncAPI for Customer Facing Mobile Application
+apiVersion: 0.1.0
+applicationDomainId: 9n3oj6yfxm3
+applicationDomainName: acme-retail - Store Operations
+applicationId: 28a372rrk0s
+applicationName: Customer Facing Mobile Application
+applicationVersionId: hxd36iqulyh
+eventApiStateId: 1
+eventApiStateName: DRAFT
+environment: production
+modelledEventMesh: acme-retail Store
+modelledEventMeshId: nb0b6yoojr2
+eventPortalEnvironmentId: 7k9gh388bd7
+logicalBroker: logical_broker_b
+queueDefinitions:
+- queueName: acme-retail.mobileapp.retail-order.updates.receive
+  queueSettings:
+    accessType: exclusive
+  topicSubscriptions:
+  - acme-retail/store-ops/retail-order/online-fulfilled/v1/*/*/*
+  - acme-retail/store-ops/retail-order/online-paid/v1/*/*/*
+  - acme-retail/store-ops/retail-order/online-cancelled/v1/*/*/*
