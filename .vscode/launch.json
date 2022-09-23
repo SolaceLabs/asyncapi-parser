@@ -19,7 +19,7 @@
             "mainClass": "com.solace.asyncapi.asyncapi_parser.AsyncApiToCICDConfig",
             "projectName": "asyncapi-cicd-parser",
             "args": [
-                "--asyncapi-in=src/test/resources/samples/myEventApi-0.1.0.yaml"]
+                "--asyncapi-in=src/test/resources/samples/acme-retail-customer-mobile.yaml"]
         }
     ]
 }

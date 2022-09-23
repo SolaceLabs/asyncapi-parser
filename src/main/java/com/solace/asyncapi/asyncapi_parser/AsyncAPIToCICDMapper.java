@@ -14,22 +14,29 @@ import com.asyncapi.v2.model.server.Server;
 import com.solace.asyncapi.cicd_extract.CICDConfig;
 import com.solace.asyncapi.cicd_extract.QueueDefinition;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class AsyncAPIToCICDMapper {
 
-    public static CICDConfig mapAsyncAPIToCICD(AsyncAPI asyncApi, String targetServer, boolean debug) 
+    public static CICDConfig mapAsyncAPIToCICD(AsyncAPI asyncApi, String targetServer) 
             throws AsyncAPIToCICDException
     {
 		Info apiInfo = asyncApi.getInfo();
 
 		if (apiInfo == null) {
-			throw new AsyncAPIToCICDException(-100, "AsyncAPI \"info\" block not found in input -- Exiting");
+			final String msg = "AsyncAPI 'info' block not found in input";
+			log.warn(msg);
+			throw new AsyncAPIToCICDException(100, msg);
 		}
-        if (debug) System.out.println("++ Found asyncApi.info block");
+		log.debug("++ Found asyncApi.info block");
 
 		if (asyncApi.getServers() == null || asyncApi.getServers().size() < 1) {
-            throw new AsyncAPIToCICDException(-101, "AsyncAPI \"servers\" block not found in input -- Exiting");
+			final String msg = "AsyncAPI 'servers' block not found in input";
+			log.warn(msg);
+            throw new AsyncAPIToCICDException(101, msg);
 		}
-        if (debug) System.out.println("++ Found asyncApi.servers block");
+		log.debug("++ Found asyncApi.servers block");
 
         Server serverRecord = null;
         String serverId = "";
@@ -38,7 +45,9 @@ public class AsyncAPIToCICDMapper {
             serverRecord = asyncApi.getServers().get(targetServer);
             serverId = targetServer;
             if (serverRecord == null) {
-                throw new AsyncAPIToCICDException(-102, "Could not find server using targetServer=" + targetServer + " -- Exiting");
+				String msg = String.format("Could not find server using targetServer=%s", targetServer);
+				log.warn(msg);
+                throw new AsyncAPIToCICDException(102, msg);
             }
         } else {
             Iterator<Map.Entry<String, Server>> serverIterator = asyncApi.getServers().entrySet().iterator();
@@ -47,15 +56,18 @@ public class AsyncAPIToCICDMapper {
                 serverRecord = serverEntry.getValue();
                 serverId = serverEntry.getKey();
             } else {
-                throw new AsyncAPIToCICDException(-103, "No server in servers block -- Exiting");
+				final String msg = "No server in servers block";
+				log.warn(msg);
+                throw new AsyncAPIToCICDException(103, msg);
             }
         }
-        if (debug) System.out.format("++ Found server == [%s]\n", serverId);
+        log.debug("++ Found server == [%s]\n", serverId);
 
         if ( asyncApi.getChannels() == null || asyncApi.getChannels().size() < 1 ) {
-			throw new AsyncAPIToCICDException(-104, "No channels found in input -- Exiting");
+			String msg = "No channels found in input";
+			throw new AsyncAPIToCICDException(104, msg);
 		}
-        if (debug) System.out.println("++ Found asyncApi.channels block");
+        log.debug("++ Found asyncApi.channels block");
 		
         CICDConfig config = new CICDConfig();
 
@@ -86,9 +98,10 @@ public class AsyncAPIToCICDMapper {
 		}
 
         if (queueDefinitions.size() == 0 ) {
-            throw new AsyncAPIToCICDException(10, "No Solace Queue Definitions found in input AsyncAPI");
+            log.warn("No Solace Queue Definitions found in input AsyncAPI");
         }
 
+		log.info("Successfull mapped AsyncApi into CICDExtract format");
 		config.setQueueDefinitions(queueDefinitions);
 
         return config;
@@ -118,10 +131,4 @@ public class AsyncAPIToCICDMapper {
 			}
 		}
 	}
-
-    public static CICDConfig mapAsyncAPIToCICD(AsyncAPI asyncApi, String targetEnv) 
-        throws Exception
-    {
-        return mapAsyncAPIToCICD(asyncApi, targetEnv, false);
-    }
 }

@@ -74,10 +74,10 @@ public class AsyncApiToCICDConfig
 		if (debug) {
 			System.out.println();
 			System.out.println("DEBUG option is ON");
-			System.out.println("Input File:  " + inputFile);
-			System.out.println("Output File: " + outputFile);
-			System.out.println("READY TO PARSE INPUT");
-			System.out.println();
+			System.out.println(  "Input File:     " + inputFile);
+			System.out.println(  "Output File:    " + outputFile);
+			System.out.println("Target Server: " + (targetServer != null ? targetServer : "NONE SPECIFIED"));
+			System.out.println("++ READY TO PARSE INPUT");
 		}
 
 		// Parse input AsyncAPI spec
@@ -97,20 +97,21 @@ public class AsyncApiToCICDConfig
 			System.err.println(ioexc.getMessage());
         	System.exit(-12);
 		}
-		if (debug) 	System.out.println("COMPLETED PARSING");
+		if (debug) 	System.out.println("++ COMPLETED PARSING");
 
 		// Map output format
 		CICDConfig config = null;
 		try {
-			config = AsyncAPIToCICDMapper.mapAsyncAPIToCICD(asyncApi, targetServer, debug);
+			config = AsyncAPIToCICDMapper.mapAsyncAPIToCICD(asyncApi, targetServer);
 		} catch ( AsyncAPIToCICDException aexc ) {
+			System.out.println( String.format("%s -- CICD extract output could not be created; Exiting", aexc.getMessage()) );
 			System.exit(aexc.getErrorCode());
 		} catch ( Exception exc ) {
 			System.err.println("An error occurred parsing the AsyncAPI input file");
 			System.err.println(exc);
 			System.exit(-1);
 		}
-		if (debug) System.out.println("COMPLETED MAPPING");
+		if (debug) System.out.println("++ COMPLETED MAPPING");
 
 		// Create output file
 		try {

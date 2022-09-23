@@ -1,6 +1,16 @@
+# MacOS
 .DS_Store
+
+# Config
+.vscode/settings.json
+
+# Test
+
+
+# Target
 target/lib/*.jar
 target/*.jar
 *.class
-.vscode/settings.json
 target/maven-status/maven-compiler-plugin/**/*.lst
+target/surefire-reports/*.txt
+
