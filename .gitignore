@@ -3,6 +3,7 @@
 
 # Config
 .vscode/settings.json
+.vscode/launch.json
 
 # Test
 
@@ -13,4 +14,3 @@ target/*.jar
 *.class
 target/maven-status/maven-compiler-plugin/**/*.lst
 target/surefire-reports/*.txt
-
